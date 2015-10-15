@@ -1,0 +1,15 @@
+# Site settings
+title: Code
+email: saucam@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Collection of discoveries and lessons learnt. Hope this saves time and effort 
+  of others facing similar problems/issues.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://saucam.github.io" # the base hostname & protocol for your site
+twitter_username: ydatta
+github_username:  saucam
+
+# Build settings
+markdown: kramdown
+
+highlighter: pygments
