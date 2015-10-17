@@ -6,7 +6,7 @@ permalink: /about/
 
 Yash Datta is an avid programming enthusiast and a table tennis addict. He takes pride in writing beautiful code, and takes
 keen interest in exploring the amazing work done by others.
-His interests include but are not not limited to :
+His interests include but are not not limited to :\\
 Data Analytics, Database systems, Heterogenous Parallel programming, GPGPU computing, High performance computing, Embedded Systems,
 Operating Systems, Computer Architecture, Digital System Designing, Theoretical Physics, Chaos Theory, Number Theory
 

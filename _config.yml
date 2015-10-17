@@ -9,6 +9,13 @@ url: "http://saucam.github.io" # the base hostname & protocol for your site
 twitter_username: ydatta
 github_username:  saucam
 
+permalink: '/blog/:year/:month/:day/:title/'
+paginate_path: '/blog/page:num/'
+
+#maintain a separate pages folder for markdown files
+include: ['_pages']
+relative_permalinks: false
+
 # Build settings
 markdown: kramdown
 
