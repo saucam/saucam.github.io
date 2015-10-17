@@ -1,5 +1,6 @@
 ---
 permalink: /
-layout:    default
-title:     Home
+redirect: /blog/
+layout:    redirect
+blogfeed: true
 ---

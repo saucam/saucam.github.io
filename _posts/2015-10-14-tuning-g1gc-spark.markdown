@@ -2,7 +2,8 @@
 layout: post
 title:  "Tuning G1 GC for spark jobs"
 date:   2015-10-14 12:48:50
-categories: spark G1GC java
+categories: blog
+tags: apache-spark G1GC
 ---
 Using G1GC with spark jobs needs careful tuning to prevent the dreaded Full GC cycles. Recently while monitoring our spark jobs, we noticed that on loading the job with many queries (25 queries per second), frequent GCs were running on the spark driver.
 
