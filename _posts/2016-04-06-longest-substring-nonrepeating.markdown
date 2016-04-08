@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Longest Common subsequence with non-repeating characters"
-date:   2016-04-07 15:12:30
+date:   2016-04-06 15:12:30
 categories: blog
 tags: problems algorithms
 ---
