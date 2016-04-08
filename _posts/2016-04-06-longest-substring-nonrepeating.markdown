@@ -23,19 +23,22 @@ element. Here is the complete solution:
 
 #include <map>
 #include <utility>
+
 using namespace std;
+
 class Solution {
 public:
+
     int lengthOfLongestSubstring(string s) {
         int mlen = 0, start = 0;
         map<char, int> m;
-        while(start < s.size()) {
+        while (start < s.size()) {
             int i = start;
-            while(m.find(s[i]) == m.end() && i < s.size()) {
+            while (m.find(s[i]) == m.end() && i < s.size()) {
                 m[s[i]] = i;
                 i++;
             }
-            if(m.size() > mlen)
+            if (m.size() > mlen)
                 mlen = m.size();
             
             if (i == s.size())
