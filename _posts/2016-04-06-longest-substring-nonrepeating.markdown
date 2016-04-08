@@ -19,7 +19,7 @@ The second idea that came to mind was to keep a map of all the unique elements s
 element is encountered, move the start of the subsequence to one more than the previous position of this non-repeating
 element. Here is the complete solution:
 
-```
+```cpp
 
 #include <map>
 #include <utility>
