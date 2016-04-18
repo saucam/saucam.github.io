@@ -1,0 +1,76 @@
+---
+layout: post
+title:  "Mixtures"
+date:   2016-04-16 15:12:30
+categories: blog
+tags: problems algorithms
+---
+Problem is to find the method of combining a list of mixtures in such a way that generated smoke is minimized.
+It is given that smoke generated when 2 mixtures are combined = a * b where a, b are flavors of the mixtures.
+Also, combining 2 mixtures generates a new mixture of flavor (a + b) % 100
+
+Found the problem [here][spoj].  
+
+Solution
+===
+
+Mixtures is a standard matrix chain multiplication problem variation with a bit of a twist. Once it is realized that we
+need to keep start and end index in the list as the dp states, storing smoke generated for each such subarray in the
+table, we encounter another problem that how to store the resultant flavor/type of the mixture as a result of the
+combination. The key insight here is that since we take mod at each step, we can keep an array where the ith value
+indicates the resultant value of combining mixtures for all j <= i (j >= 0). Therefore to find resultant type of mixture
+which is a result of combining mixtures from index i to j, we can simply do (100 + array[j] - array[i]) % 100 (where j >
+i).
+
+Complete code follows:
+
+```cpp
+
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+int arr[101];
+long long dp[101][101];
+int val[102];
+
+int main() {
+  int n;
+  while(~scanf("%d", &n)) {
+    for (int i=0; i<n; i++) {
+      scanf("%d", &arr[i]);
+    }
+
+    val[0] = 0;
+    for (int i=1; i<=n; i++) {
+      val[i] = (val[i-1] + arr[i-1])%100;
+    }
+
+    for (int L=1; L<n; L++) {
+      for (int i=0; i<n-L; i++) {
+
+        int j = i + L;
+        dp[i][j] = numeric_limits<long long>::max();
+
+        int diff1, diff2;
+        for (int k=i; k<j; k++) {
+          diff1 = (100 + val[k+1] - val[i])%100;
+          diff2 = (100 + val[j+1] - val[k+1])%100;
+          long long smoke = dp[i][k] + dp[k+1][j] + diff1*diff2;//(val[k+1]-val[i])*(val[j+1] - val[k+1]);
+          if (smoke < dp[i][j])
+            dp[i][j] = smoke;
+        }
+      }
+    }
+
+    printf("%lld\n", dp[0][n-1]);
+  }
+  return 0;
+
+}
+
+```
+
+
+[spoj]:                 http://www.spoj.com/problems/MIXTURES/ 
