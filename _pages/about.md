@@ -4,11 +4,18 @@ title: About
 permalink: /about/
 ---
 
-Yash Datta is an avid programming enthusiast and a table tennis addict. He takes pride in writing beautiful code, and takes
-keen interest in exploring the amazing work done by others.
+Yash Datta is a builder and a maker at heart. He is passionate about solving real world problems through the use of
+technology.
+Yash has worked as part of platform team at Guavus for more than 4 years. He was responsible for developing scalable
+distributed solutions for analyzing complex telco data in near real time.He has also worked on and developed projects
+with various microcontroller families. A scala fan-boy, Yash is an avid open source enthusiast and has contributed code
+to several open source projects including last 6 major releases of apache-spark.
 His interests include but are not not limited to :\\
 Data Analytics, Database systems, Heterogenous Parallel programming, GPGPU computing, High performance computing, Embedded Systems,
 Operating Systems, Computer Architecture, Digital System Designing, Theoretical Physics, Chaos Theory, Number Theory
+
+He has an engineering degree in Instrumentation and Control from NSIT, Delhi
+In his free time, he likes to play table tennis or think about a move for a correspondence chess game.
 
 - [This](https://github.com/saucam) is his github profile.
 - [This](https://in.linkedin.com/in/ydatta) is his linkedin profile.
