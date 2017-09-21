@@ -1,0 +1,82 @@
+---
+layout: post
+title:  "Multi-project sbt build without root project"
+date:   2017-09-20 14:30:30
+categories: blog
+tags: sbt scala
+---
+Sometimes, the need is to create a multi-project sbt build. But such projects might not always have a root project that makes sense. In such cases, root just serves as an assembler of related sub-projects. Unfortunately, it is hard to get such a case right in build.sbt file. After much searching and experimentation, here is a sample build.sbt, that skips creating and publishing a jar for the root project, but works for other sub-projects:
+
+build.sbt of root project
+```
+import sbt._
+
+addCommandAlias("rebuild", ";clean; compile; package")
+
+//////////////////////////////////////////////////////////////////////////////
+// PROJECT INFO
+//////////////////////////////////////////////////////////////////////////////
+val Organization           = "random.random"
+val ProjectName            = "Multi-project"
+val ProjectScalaVersion    = "2.12.1"
+
+// Force scala version
+ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
+
+Keys.`package` :=  file("")
+// Every property in Gobal scope can be overridden by sub-projects if it is defined in their settings
+packageBin in Global :=  file("")
+packagedArtifacts :=  Map()
+
+// Skip publishing anything by default
+publishArtifact in Global := false
+publishArtifact in Compile in Global := false
+publishArtifact in assembly in Global := false
+
+// publish to is still required!!
+publishTo in Global := {
+  // Artifactory definition here
+}
+credentials in Global += Credentials(
+  // Credentials here
+)
+
+//////////////////////////////////////////////////////////////////////////////
+// PROJECTS
+//////////////////////////////////////////////////////////////////////////////
+lazy val common = Project(
+  id = "common-project",
+  base = file("common"),
+  settings = commonSettings
+)
+
+lazy val main = Project(
+  id = "main-project",
+  base = file("main"),
+  settings = commonSettings
+).settings(Seq(
+  // Enable publishing the main project here!
+  publishArtifact := true) ++ addArtifact(artifact in (Compile, assembly), assembly)
+).aggregate(common)
+ .dependsOn(
+    common)
+
+lazy val commonSettings = Defaults.coreDefaultSettings ++
+  basicSettings
+lazy val basicSettings = Seq(
+  organization := Organization,
+  scalaVersion := ProjectScalaVersion,
+  updateOptions := updateOptions.value.withCachedResolution(true),
+
+ scalacOptions in Compile ++= Seq(
+    "-unchecked",
+    "-deprecation",
+    "-feature",
+    "-language:postfixOps",
+    "-Xlint",
+    "-target:jvm-1.8"
+  ),
+
+  // More common settings here
+)
+```
